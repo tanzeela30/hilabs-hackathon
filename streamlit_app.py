@@ -125,7 +125,7 @@ if st.sidebar.button("Run Prediction"):
     # ----------------------------
    # Ensure patient_id column always exists
     if "patient_id" not in data.columns:
-    st.warning("patient_id missing in processed data — attempting recovery.")
+        st.warning("patient_id missing in processed data — attempting recovery.")
         if data.index.name == "patient_id":
         data = data.reset_index()
 

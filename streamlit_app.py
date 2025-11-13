@@ -127,7 +127,7 @@ if st.sidebar.button("Run Prediction"):
     if "patient_id" not in data.columns:
         st.warning("patient_id missing in processed data — attempting recovery.")
         if data.index.name == "patient_id":
-        data = data.reset_index()
+            data = data.reset_index()
 
     output = pd.DataFrame({
         "patient_id": data["patient_id"],

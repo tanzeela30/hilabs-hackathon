@@ -1,3 +1,4 @@
+import pandas as pd
 patient = pd.read_csv('patient.csv')
 
 # ------------------ CELL ------------------

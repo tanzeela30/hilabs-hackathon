@@ -615,6 +615,22 @@ data.info()
 
 missing_cols = [c for c in cols_to_keep if c not in data.columns]
 missing_cols
+# ==========================================================
+# ENSURE patient_id is present in final dataframe
+# ==========================================================
+if 'patient_id' not in data.columns:
+
+    # Case 1: patient_id became the index → recover it
+    if data.index.name == 'patient_id':
+        data = data.reset_index()
+
+    # Case 2: earlier df still has patient_id → copy it in
+    elif 'patient_id' in df.columns:
+        data['patient_id'] = df['patient_id']
+
+    # Case 3: last attempt — recover from any merged intermediate
+    elif 'patient_id' in locals():
+        data['patient_id'] = patient['patient_id']  # last-resort fallback
 
 
 # ------------------ CELL ------------------

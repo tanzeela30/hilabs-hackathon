@@ -123,13 +123,17 @@ if st.sidebar.button("Run Prediction"):
     # ----------------------------
     # Generate Output
     # ----------------------------
-    if "patient_id" in data.columns:
-        output = pd.DataFrame({
-            "patient_id": data["patient_id"],
-            "predicted_risk_score": preds
-        })
-    else:
-        output = pd.DataFrame({"predicted_risk_score": preds})
+   # Ensure patient_id column always exists
+    if "patient_id" not in data.columns:
+    st.warning("patient_id missing in processed data — attempting recovery.")
+    if data.index.name == "patient_id":
+        data = data.reset_index()
+
+    output = pd.DataFrame({
+    "patient_id": data["patient_id"],
+    "predicted_risk_score": preds
+    })
+
 
     st.write("### Prediction Results")
     st.dataframe(output.head(50))

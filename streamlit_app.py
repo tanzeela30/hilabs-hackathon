@@ -100,8 +100,15 @@ if st.sidebar.button("Run Prediction"):
     # Determine feature columns
     cols_to_keep = ns.get("cols_to_keep", None)
 
-    if cols_to_keep:
-        X = data[cols_to_keep]
+   if cols_to_keep:
+    existing = [c for c in cols_to_keep if c in data.columns]
+    missing = [c for c in cols_to_keep if c not in data.columns]
+
+    if missing:
+        st.warning(f"These columns were missing and skipped: {missing}")
+
+    X = data[existing]
+
     else:
         X = data.select_dtypes(include=[np.number])
 

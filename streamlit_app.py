@@ -104,8 +104,7 @@ if st.sidebar.button("Run Prediction"):
       existing = [c for c in cols_to_keep if c in data.columns]
       missing = [c for c in cols_to_keep if c not in data.columns]
 
-      if missing:
-        st.warning(f"These columns were missing and skipped: {missing}")
+      
 
       X = data[existing]
 

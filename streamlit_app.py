@@ -149,9 +149,16 @@ if st.sidebar.button("Run Prediction & Evaluation"):
     # ---------------------------------
     # Evaluation Metrics
     # ---------------------------------
+    from sklearn.metrics import mean_absolute_error, mean_squared_error
 
+# MAE
     mae = mean_absolute_error(merged["risk_score"], merged["predicted_risk_score"])
-    rmse = mean_squared_error(merged["risk_score"], merged["predicted_risk_score"], squared=False)
+
+# RMSE (manual calculation for compatibility)
+    mse = mean_squared_error(merged["risk_score"], merged["predicted_risk_score"])
+    rmse = np.sqrt(mse)
+
+# Correlation
     corr = merged["risk_score"].corr(merged["predicted_risk_score"])
 
     st.subheader("📊 Model Evaluation")
